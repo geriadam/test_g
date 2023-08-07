@@ -1,16 +1,12 @@
 import React from 'react'
 
-import TagWithMemo, { Tag } from './index'
+import ListWithMemo, { SelectableList } from './index'
 
 export default {
-    title: 'Tag title',
-    component: Tag
+    title: 'SelectableList',
+    component: SelectableList
 }
 
-export const Basic = () => (
-    <TagWithMemo />
-)
-
-export const Second = () => (
-    <TagWithMemo title="My second title" />
+export const List = () => (
+    <ListWithMemo items={["Arm / Upper body", "Surf Fitness", "Lower Body", "Boxing Exercise"]} onSelect={() => {}}/>
 )

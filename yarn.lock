@@ -2228,6 +2228,14 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@matechs/core@^2.12.0":
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/@matechs/core/-/core-2.12.0.tgz#78bc3e873e4701b25490c8945c988da551e5818a"
+  integrity sha512-4tb/vIAU3VTATNkLlKBmCh8IKWkr00IC1AeYhXCdgVz8damBWelZlrd21Ktoa2rzOrV7wJnMxPrex+osE/Ef1g==
+  dependencies:
+    fp-ts "^2.7.1"
+    fp-ts-contrib "^0.1.17"
+
 "@mdx-js/loader@^1.5.1":
   version "1.6.5"
   resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-1.6.5.tgz#f2826c79f18cbc6b502dd5722d7e7101e5658dbb"
@@ -7447,6 +7455,16 @@ forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
   integrity sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
+
+fp-ts-contrib@^0.1.17:
+  version "0.1.29"
+  resolved "https://registry.yarnpkg.com/fp-ts-contrib/-/fp-ts-contrib-0.1.29.tgz#5d3c07bab21bb1c0491ca8d6f82d75fc7463b0cf"
+  integrity sha512-y+f+xlZqYgj2t+Alu/oat10UC491PByvH7XrT0ITc/DbDJK7LDJLShZJy2orjE7PlcJkO5niDenc1A/woyeB/Q==
+
+fp-ts@^2.7.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.16.1.tgz#6abc401ce42b65364ca8f0b0d995c5840c68a930"
+  integrity sha512-by7U5W8dkIzcvDofUcO42yl9JbnHTEDBrzu3pt5fKT+Z4Oy85I21K80EYJYdjQGC2qum4Vo55Ag57iiIK4FYuA==
 
 fragment-cache@^0.2.1:
   version "0.2.1"
