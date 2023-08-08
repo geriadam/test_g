@@ -16,9 +16,15 @@ const initialItems: Item[] = [
 
 function App() {
   const [items, setItems] = useState<Item[]>(initialItems);
+  const [selectedOptions, setSelectedOptions] = useState<Item[]>([]);
 
-  const handleTagChange = (index: number, checked: boolean) => {
+  const handleTagChange = (item: Item) => {
     // Todo handle tag change here
+    if (selectedOptions.includes(item)) {
+      setSelectedOptions(selectedOptions.filter(tag => tag !== item));
+    } else {
+      setSelectedOptions([...selectedOptions, item]);
+    }
   };
 
   const handleReset = () => {
@@ -27,6 +33,7 @@ function App() {
 
   const handleSubmit = () => {
     // Todo handle submit here
+    alert(JSON.stringify(selectedOptions));
   };
 
   return (
@@ -37,8 +44,8 @@ function App() {
             <TagItem
               key={index}
               label={item.label}
-              isChecked={item.isChecked}
-              onChange={(checked: any) => handleTagChange(index, checked)}
+              isChecked={selectedOptions.includes(item)}
+              onChange={() => handleTagChange(item)}
             />
           ))}
         </div>
