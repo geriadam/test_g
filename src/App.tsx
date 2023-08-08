@@ -18,7 +18,7 @@ function App() {
   const [items, setItems] = useState<Item[]>(initialItems);
   const [selectedOptions, setSelectedOptions] = useState<Item[]>([]);
 
-  const handleTagChange = (item: Item) => {
+  const handleItemChange = (item: Item) => {
     // Todo handle tag change here
     if (selectedOptions.includes(item)) {
       setSelectedOptions(selectedOptions.filter(tag => tag !== item));
@@ -27,8 +27,17 @@ function App() {
     }
   };
 
+  const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setSelectedOptions(items);
+    } else {
+      handleReset()
+    }
+  }
+
   const handleReset = () => {
-    // Todo handle reset here
+    setSelectedOptions([]);
   }
 
   const handleSubmit = () => {
@@ -39,13 +48,21 @@ function App() {
   return (
     <div className='mx-auto mt-10 w-full grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 px-5 pb-8 md:max-w-8xl short:pb-2 short:pt-2'>
       <div className="flex flex-col gap-3 w-full max-w-md h-auto py-4 mx-auto bg-gray p-4 px-0 rounded-lg bg-white">
+        <div className="flex px-4 gap-2 mb-4">
+          <input
+            type='checkbox'
+            checked={selectedOptions.length === items.length}
+            onChange={(event) => handleSelectAll(event)}
+          />
+          <span className='text-sm'>Select All</span>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 px-4">
-          {items.map((item, index) => (
+          {items.map((item: Item, index: number) => (
             <TagItem
               key={index}
               label={item.label}
               isChecked={selectedOptions.includes(item)}
-              onChange={() => handleTagChange(item)}
+              onChange={() => handleItemChange(item)}
             />
           ))}
         </div>
