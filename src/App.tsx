@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { pipe } from '@matechs/core/Function';
+import { array as A, option as O } from '@matechs/core';
 import TagItem from './components/TagItem/index';
 import Button from './components/Button/index';
 
@@ -20,30 +22,39 @@ function App() {
 
   const handleItemChange = (item: Item) => {
     // Todo handle tag change here
-    if (selectedOptions.includes(item)) {
-      setSelectedOptions(selectedOptions.filter(tag => tag !== item));
-    } else {
-      setSelectedOptions([...selectedOptions, item]);
-    }
+    pipe(
+      selectedOptions,
+      O.fromPredicate(selected => selected.includes(item)),
+      O.fold(
+        () => setSelectedOptions([...selectedOptions, item]),
+        () => setSelectedOptions(selectedOptions.filter(tag => tag !== item))
+      )
+    );
   };
 
   const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
-    if (isChecked) {
-      setSelectedOptions(items);
-    } else {
-      handleReset()
-    }
+    setSelectedOptions(isChecked ? items : []);
   }
 
-  const handleReset = () => {
-    setSelectedOptions([]);
-  }
+  const handleReset = () => setSelectedOptions([]);
 
   const handleSubmit = () => {
     // Todo handle submit here
     alert(JSON.stringify(selectedOptions));
   };
+
+  const renderedItems = pipe(
+    initialItems,
+    A.map(item => (
+      <TagItem
+        key={item.label}
+        label={item.label}
+        isChecked={selectedOptions.includes(item)}
+        onChange={() => handleItemChange(item)}
+      />
+    ))
+  );
 
   return (
     <div className='mx-auto mt-10 w-full grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 px-5 pb-8 md:max-w-8xl short:pb-2 short:pt-2'>
@@ -57,14 +68,7 @@ function App() {
           <span className='text-sm'>Select All</span>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 px-4">
-          {items.map((item: Item, index: number) => (
-            <TagItem
-              key={index}
-              label={item.label}
-              isChecked={selectedOptions.includes(item)}
-              onChange={() => handleItemChange(item)}
-            />
-          ))}
+          {renderedItems}
         </div>
         <div className="pt-3 px-4 py-4 flex flex-row justify-end gap-2 border-solid border-[#e8eaec] w-full border-t border-b-0 border-x-0">
           <Button label="Reset" variant='default' onClick={handleReset} />
